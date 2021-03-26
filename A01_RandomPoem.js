@@ -4,7 +4,7 @@ var A01_RandomPoem;
     let subject = ["Harry", "Hermine", "Ron", "Hagrid", "Snape", "Dumbledore"];
     let verb = ["braut", "liebt", "studiert", "hasst", "zaubert", "zerstört"];
     let object = ["Zaubertränke", "den Grimm", "Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren"];
-    console.log(subject, verb, object);
+    // console.log(subject, verb, object);
     //Schleife:
     for (let i = subject.length; i > 0; i--) {
         // console.log(i);

@@ -3,7 +3,7 @@ namespace A01_RandomPoem {
     let verb: string[] = ["braut", "liebt", "studiert", "hasst", "zaubert", "zerstört"];
     let object: string[] = ["Zaubertränke", "den Grimm", "Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren"];
     
-    console.log(subject, verb, object);
+    // console.log(subject, verb, object);
 
     //Schleife:
     for (let i: number = subject.length; i > 0; i--) {
