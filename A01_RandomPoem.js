@@ -1,9 +1,9 @@
 "use strict";
 var A01_RandomPoem;
 (function (A01_RandomPoem) {
-    let n = ["Daenerys Targaryen ", "Jon Snow ", "Arya Stark ", "Sansa Stark ", "Eddard Stark ", "Joffrey Baratheon "];
-    let v = ["kauft ", "benutzt ", "vergisst ", "sucht ", "liebt ", "hasst "];
-    let o = ["Schwerter ", "Tröne ", "Familie Baratheon ", "Kronen ", "Kriege ", "Drachen "];
+    let n = ["Harry", "Hermine", "Ron", "Hagrid", "Snape", "Dumbledore"];
+    let v = ["braut", "liebt", "studiert", "hasst", "zaubert", "zerstört"];
+    let o = ["Zaubertränke", "den Grimm", "Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren"];
     let;
     //Schleife:
     for (let i = 0; i < n.length; i++) {

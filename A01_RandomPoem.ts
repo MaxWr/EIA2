@@ -1,13 +1,13 @@
 namespace A01_RandomPoem {
-    let subjekt: string[] = ["Harry", "Hermine", "Ron", "Hagrid", "Snape", "Dumbledore"];
+    let subject: string[] = ["Harry", "Hermine", "Ron", "Hagrid", "Snape", "Dumbledore"];
     let verb: string[] = ["braut", "liebt", "studiert", "hasst", "zaubert", "zerstört"];
-    let objekt: string[] = ["Zaubertränke", "den Grimm", "Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren"];
-    let satz: string = "";
+    let object: string[] = ["Zaubertränke", "den Grimm", "Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren"];
+    let sentence: string = "";
     
-    //console.log(subjekt, verb, objekt);
+    console.log(subject, verb, object);
 
     //Schleife:
-    for (var i: number = 6; i <= subjekt.length; i--) {
+    for (var i: number = 6; i <= subject.length; i--) {
         //if (a == 0){
             //break;
         //}
