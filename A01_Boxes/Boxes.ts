@@ -4,6 +4,8 @@ namespace Boxes {
     let x: number = 0;
     let y: number = 0;
 
+    window.onload = function main() {    
+
     for (let i: number = 0; i < n; i++) {
         y += (i == 2) ? 20 : 50;
         x = (x + 170) % 400;
@@ -27,6 +29,7 @@ namespace Boxes {
                 break;
         }
     }
+}    
 
 
     function createBox(_color: string, _x: number, _y: number, _size: string): void {
