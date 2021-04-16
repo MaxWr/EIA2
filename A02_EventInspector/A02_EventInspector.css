@@ -1,0 +1,12 @@
+div{
+    border: thick solid black;
+    width: 500px;
+    height: 700px;
+    margin-top: 60px;
+    margin-left: 60px;
+    float:left;
+}
+
+span{
+    position: fixed;
+}
