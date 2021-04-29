@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L03_MemorySettings von Max Wronka</title>
+
+    <script src="MemorySettings.js"></script>
+    <link href="MemorySettings.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Memory Game!</h1>
+<p>Choose number of card pairs (5-25) <input type="number" id="cardAmount" name="points" step="1" max="25" min="5"></p>
+
+<input type="range" min="1" max="100" value="50" class="slider" id="cardSize">
+
+<p></p>
+
+<input type="color" id="colorPickFront">
+<input type="color" id="colorPickBack">
+<input type="color" id="colorPickFont">
+
+<p></p>
+
+<select name="Font" id="fontPick">
+    <option value="Times New Roman">Times New Roman</option>
+    <option value="Brush Script MT">Brush Script MT</option>
+    <option value="	Copperplate">Copperplate</option>
+</select>
+
+<p></p>
+
+<button id="startButton">Start Game</button>
+
+<div id="endScreen">
+
+    <p>Congratulations!</p>
+    <button id="endGame" onClick="window.location.reload();">End Game</button>
+    
+</div>
+
+
+</body>
+</html>
+
