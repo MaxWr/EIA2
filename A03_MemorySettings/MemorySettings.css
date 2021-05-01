@@ -1,3 +1,27 @@
 #endScreen{
     visibility: hidden;
 }
+
+#container {
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+p {
+    font-size: 50px;
+    text-align: center;
+    margin: 0 auto; 
+}
+
+#ui, #cardAmount, #fontPick, #startButton {
+    font-size: 25px;
+    text-align: left;
+}
+
+@media only screen and (min-width: 1160px) {
+    #container {
+        grid-template-columns: auto auto auto auto auto;
+    }
+}

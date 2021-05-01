@@ -8,45 +8,38 @@ function handleStart() {
 let cards = [];
 let oneCardRevealed = false;
 let firstRevealedCard;
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
+let formData;
 function createGame() {
-    let cardAmountInput = document.getElementById("cardAmount");
-    let cardAmount = parseInt(cardAmountInput.value);
+    formData = new FormData(document.forms[0]);
+    let cardAmount = parseInt(formData.get("cardAmount"));
     for (let i = 0; i < cardAmount; i++) {
         let div0 = document.createElement("div");
-        let slider = document.getElementById("cardSize");
-        let colorPick = document.getElementById("colorPickBack");
-        div0.style.backgroundColor = colorPick.value;
-        div0.style.width = slider.value + "px";
-        div0.style.height = slider.value + "px";
+        let div1 = document.createElement("div");
+        div0.style.backgroundColor = formData.get("colorPickBack");
+        div0.style.width = formData.get("cardSize") + "px";
+        div0.style.height = formData.get("cardSize") + "px";
+        div0.id = "A";
+        div1.style.backgroundColor = formData.get("colorPickBack");
+        div1.style.width = formData.get("cardSize") + "px";
+        div1.style.height = formData.get("cardSize") + "px";
+        div1.id = "B";
         let p0 = document.createElement("p");
+        let p1 = document.createElement("p");
         p0.textContent = i.toString();
         p0.style.visibility = "hidden";
-        let colorPickFont = document.getElementById("colorPickFont");
-        p0.style.color = colorPickFont.value;
-        let fontPick = document.getElementById("fontPick");
-        p0.style.fontFamily = fontPick.value;
-        div0.appendChild(p0);
-        let div1 = document.createElement("div");
-        div1.style.backgroundColor = colorPick.value;
-        div1.style.width = slider.value + "px";
-        div1.style.height = slider.value + "px";
-        let p1 = document.createElement("p");
-        p1.innerText = i.toString();
+        p0.style.color = formData.get("colorPickFont");
+        p0.style.fontFamily = formData.get("font");
+        p1.textContent = i.toString();
         p1.style.visibility = "hidden";
-        p1.style.fontFamily = fontPick.value;
+        p1.style.color = formData.get("colorPickFont");
+        p1.style.fontFamily = formData.get("font");
+        div0.appendChild(p0);
         div1.appendChild(p1);
         cards.push(div0, div1);
     }
     cards = shuffleArray(cards);
     for (let j = 0; j < cardAmount * 2; j++) {
-        document.body.appendChild(cards[j]);
+        document.getElementById("container").appendChild(cards[j]);
         cards[j].addEventListener("click", revealCard);
     }
 }
@@ -59,30 +52,29 @@ function shuffleArray(array) {
     }
     return array;
 }
+let card;
+let x;
+let y;
 function revealCard(_event) {
-    let card = _event.target;
-    let x = card.children[0];
+    card = _event.target;
+    x = card.children[0];
+    if (firstRevealedCard != null)
+        y = firstRevealedCard.children[0];
+    if (firstRevealedCard != null && card.id == firstRevealedCard.id && x.textContent == y.textContent)
+        return;
     x.style.visibility = "visible";
-    let colorPickFront = document.getElementById("colorPickFront");
-    let colorPickBack = document.getElementById("colorPickBack");
-    card.style.backgroundColor = colorPickFront.value;
+    card.style.backgroundColor = formData.get("colorPickFront");
     if (oneCardRevealed) {
-        //sleep(700);
-        let y = firstRevealedCard.children[0];
         if (x.textContent == y.textContent) {
             for (let a = 0; a < cards.length; a++) {
                 let b = cards[a].children[0];
                 if (b.textContent == x.textContent)
                     cards.splice(a, 1);
             }
-            card.remove();
-            firstRevealedCard.remove();
+            setTimeout(removeCards, 1000);
         }
         else {
-            x.style.visibility = "hidden";
-            y.style.visibility = "hidden";
-            card.style.backgroundColor = colorPickBack.value;
-            firstRevealedCard.style.backgroundColor = colorPickBack.value;
+            setTimeout(hideCards, 1000);
         }
         oneCardRevealed = false;
     }
@@ -90,9 +82,20 @@ function revealCard(_event) {
         firstRevealedCard = card;
         oneCardRevealed = true;
     }
-    if (cards.length == 1) {
+    if (cards.length == 2) {
         let c = document.getElementById("endScreen");
         c.style.visibility = "visible";
     }
+}
+function hideCards() {
+    x.style.visibility = "hidden";
+    y.style.visibility = "hidden";
+    card.style.backgroundColor = formData.get("colorPickBack");
+    firstRevealedCard.style.backgroundColor = formData.get("colorPickBack");
+    firstRevealedCard = null;
+}
+function removeCards() {
+    card.remove();
+    firstRevealedCard.remove();
 }
 //# sourceMappingURL=MemorySettings.js.map

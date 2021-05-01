@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L03_MemorySettings von Max Wronka</title>
 
-    <script src="MemorySettings.js"></script>
-    <link href="MemorySettings.css" rel="stylesheet">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>L03_MemorySettings von Max Wronka</title>
 
-<h1>Memory Game!</h1>
-<p>Choose number of card pairs (5-25) <input type="number" id="cardAmount" name="points" step="1" max="25" min="5"></p>
+        <script src="MemorySettings.js"></script>
+        <link href="MemorySettings.css" rel="stylesheet">
+    </head>
 
-<input type="range" min="1" max="100" value="50" class="slider" id="cardSize">
+    <body>
+        <h1>Memory Game!</h1>
+            
+        <form>
+            <p id="ui">Choose number of card pairs (5-25) <input name="cardAmount" type="number" id="cardAmount" value="5" name="points" step="1" max="25" min="5"></p>
 
-<p></p>
+            <br>
 
-<input type="color" id="colorPickFront">
-<input type="color" id="colorPickBack">
-<input type="color" id="colorPickFont">
+            <p id="ui">Card size: <input name="cardSize" type="range" min="50" max="200" value="100" class="slider" id="cardSize"></p>
 
-<p></p>
+            <br>
 
-<select name="Font" id="fontPick">
-    <option value="Times New Roman">Times New Roman</option>
-    <option value="Brush Script MT">Brush Script MT</option>
-    <option value="	Copperplate">Copperplate</option>
-</select>
+            <p id="ui">Front: <input name="colorPickFront" type="color" value="#ff0000" id="colorPickFront">
+            Back: <input name="colorPickBack" type="color" id="colorPickBack">
+            Font: <input type="color" name="colorPickFont" value="#ffffff" id="colorPickFont">
+            </p>
 
-<p></p>
+            <br>
 
-<button id="startButton">Start Game</button>
+            <select name="fEont" id="fontPick">
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Brush Script MT">Brush Script MT</option>
+                <option value="Arial">Arial</option>
+            </select>
+        </form>
+        
+        <br>
 
-<div id="endScreen">
+        <br>
 
-    <p>Congratulations!</p>
-    <button id="endGame" onClick="window.location.reload();">End Game</button>
-    
-</div>
+        <button id="startButton">Start Game</button>
+        <div id="container"></div>
 
+        <div id="endScreen">
+            <p>Congratulations!</p>
+            <button id="endGame" onClick="window.location.reload();">End Game</button>
+        </div>
+    </body>
 
-</body>
 </html>
-

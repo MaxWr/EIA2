@@ -1,64 +1,57 @@
-window.onload = function main() {
+window.onload = function main(): void {
     handleStart();
-}
+};
 
-function handleStart() {
+function handleStart(): void {
     document.getElementById("startButton")?.addEventListener("click", createGame);
 }
 
-let cards : HTMLDivElement[] = [];
-let oneCardRevealed : boolean = false;
-let firstRevealedCard : HTMLDivElement;
+let cards: HTMLDivElement[] = [];
+let oneCardRevealed: boolean = false;
+let firstRevealedCard: HTMLDivElement;
+let formData: FormData;
 
-function sleep(milliseconds: number) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
+function createGame(): void {
 
-function createGame() {
+    formData = new FormData(document.forms[0]);
 
-    let cardAmountInput: HTMLInputElement = <HTMLInputElement>document.getElementById("cardAmount");
-    let cardAmount: number = parseInt(cardAmountInput.value);
+    let cardAmount: number = parseInt(<string>formData.get("cardAmount"));
 
     for (let i: number = 0; i < cardAmount; i++) {
+
         let div0: HTMLDivElement = document.createElement("div");
-        let slider: HTMLInputElement = <HTMLInputElement>document.getElementById("cardSize");
-        let colorPick: HTMLInputElement = <HTMLInputElement>document.getElementById("colorPickBack");
-        div0.style.backgroundColor = colorPick.value;
-        div0.style.width = slider.value + "px";
-        div0.style.height = slider.value + "px";
+        let div1: HTMLDivElement = document.createElement("div");
+        div0.style.backgroundColor = <string>formData.get("colorPickBack");
+        div0.style.width = <string>formData.get("cardSize") + "px";
+        div0.style.height = <string>formData.get("cardSize") + "px";
+        div0.id = "A";
+        div1.style.backgroundColor = <string>formData.get("colorPickBack");
+        div1.style.width = <string>formData.get("cardSize") + "px";
+        div1.style.height = <string>formData.get("cardSize") + "px";
+        div1.id = "B";
+
         let p0: HTMLParagraphElement = document.createElement("p");
+        let p1: HTMLParagraphElement = document.createElement("p");
         p0.textContent = i.toString();
         p0.style.visibility = "hidden";
-        let colorPickFont: HTMLInputElement = <HTMLInputElement>document.getElementById("colorPickFont");
-        p0.style.color = colorPickFont.value;
-        let fontPick: HTMLSelectElement = <HTMLSelectElement>document.getElementById("fontPick");
-        p0.style.fontFamily = fontPick.value;
-        div0.appendChild(p0);
-
-        let div1: HTMLDivElement = document.createElement("div");
-        div1.style.backgroundColor = colorPick.value;
-        div1.style.width = slider.value + "px";
-        div1.style.height = slider.value + "px";
-        let p1: HTMLParagraphElement = document.createElement("p");
-        p1.innerText = i.toString();
+        p0.style.color = <string>formData.get("colorPickFont");
+        p0.style.fontFamily = <string>formData.get("font");
+        p1.textContent = i.toString();
         p1.style.visibility = "hidden";
-        p1.style.fontFamily = fontPick.value;
+        p1.style.color = <string>formData.get("colorPickFont");
+        p1.style.fontFamily = <string>formData.get("font");
+        
+        div0.appendChild(p0);
         div1.appendChild(p1);
-
         cards.push(div0, div1);
     }
 
     cards = shuffleArray(cards);
 
-    for (let j: number = 0; j < cardAmount*2; j++){
-        document.body.appendChild(cards[j]);
+    for (let j: number = 0; j < cardAmount * 2; j++) {
+        document.getElementById("container").appendChild(cards[j]);
         cards[j].addEventListener("click", revealCard);
     }
-
 }
 
 function shuffleArray(array: HTMLDivElement[]): HTMLDivElement[] {
@@ -71,47 +64,60 @@ function shuffleArray(array: HTMLDivElement[]): HTMLDivElement[] {
     return array;
 }
 
-function revealCard(_event: Event){
-    let card : HTMLDivElement = <HTMLDivElement>_event.target;
-    let x : HTMLParagraphElement = <HTMLParagraphElement>card.children[0];
+let card: HTMLDivElement;
+let x: HTMLParagraphElement;
+let y: HTMLParagraphElement;
+
+function revealCard(_event: Event): void {
+    card = <HTMLDivElement>_event.target;
+    x = <HTMLParagraphElement>card.children[0];
+
+    if (firstRevealedCard != null)
+        y = <HTMLParagraphElement>firstRevealedCard.children[0];
+    
+    if (firstRevealedCard != null && card.id == firstRevealedCard.id && x.textContent == y.textContent) 
+        return;
+    
     x.style.visibility = "visible";
-
-    let colorPickFront: HTMLInputElement = <HTMLInputElement>document.getElementById("colorPickFront");
-    let colorPickBack: HTMLInputElement = <HTMLInputElement>document.getElementById("colorPickBack");
-    card.style.backgroundColor = colorPickFront.value;
-
-
-    if (oneCardRevealed){
-        //sleep(700);
-        let y: HTMLParagraphElement = <HTMLParagraphElement>firstRevealedCard.children[0];
-        if (x.textContent == y.textContent){
-            for (let a: number = 0; a < cards.length; a++){
+    card.style.backgroundColor = <string>formData.get("colorPickFront");
+    
+    if (oneCardRevealed) {
+        
+        if (x.textContent == y.textContent) {
+            for (let a: number = 0; a < cards.length; a++) {
                 let b: HTMLParagraphElement = <HTMLParagraphElement>cards[a].children[0];
 
                 if (b.textContent == x.textContent)
-                    cards.splice(a,1);
+                    cards.splice(a, 1) ;
             }
             
-            card.remove();
-            firstRevealedCard.remove();
+            setTimeout(removeCards, 1000);
         }
 
         else {
-            x.style.visibility = "hidden";
-            y.style.visibility = "hidden";
-            card.style.backgroundColor = colorPickBack.value;
-            firstRevealedCard.style.backgroundColor = colorPickBack.value;
+            setTimeout(hideCards, 1000);
         }
         oneCardRevealed = false;
     }
-
     else {
         firstRevealedCard = card;
         oneCardRevealed = true;
     }
-
-    if (cards.length == 1) {
+    if (cards.length == 2) {
         let c: HTMLDivElement = <HTMLDivElement>document.getElementById("endScreen");
         c.style.visibility = "visible";
     }
+}
+
+function hideCards() {
+    x.style.visibility = "hidden";
+    y.style.visibility = "hidden";
+    card.style.backgroundColor = <string>formData.get("colorPickBack");
+    firstRevealedCard.style.backgroundColor = <string>formData.get("colorPickBack");
+    firstRevealedCard = null;
+}
+
+function removeCards() {
+    card.remove();
+    firstRevealedCard.remove();
 }
