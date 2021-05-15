@@ -29,7 +29,7 @@ namespace L08_Canvas_Alley{
             drawTrees(Math.floor(Math.random() * crc2.canvas.width) + 1, {x: 15, y: 20});
         }
         
-        let flowerColors:string[] = ["orange", "red", "blue"];
+        let flowerColors: string[] = ["orange", "red", "blue"];
         for (let r: number = 0; r < 150; r++){
             let i: number = (Math.floor(Math.random() * 3) + 1)-1;
             drawFlowers(Math.floor(Math.random() * crc2.canvas.width) + 1, {x: 3, y: 3}, flowerColors[i]);
@@ -179,7 +179,7 @@ namespace L08_Canvas_Alley{
 
         crc2.save();
         crc2.translate(_positionX, y);
-        console.log(y);
+        // console.log(y);
 
         crc2.fillStyle = "RGB(0, 128, 0)";
 
@@ -212,7 +212,7 @@ namespace L08_Canvas_Alley{
 
         crc2.save();
         crc2.translate(_positionX, y);
-        console.log(y);
+        // console.log(y);
 
         crc2.fillStyle = _color;
 
