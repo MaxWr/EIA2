@@ -1,0 +1,11 @@
+canvas{
+    height: 600px;
+    width: 800px;
+}
+
+@media only screen and (min-width: 1600px) {
+    canvas {
+        height: 1200px;
+        width: 1600px;
+    }
+}

@@ -13,10 +13,8 @@ var L08_Canvas_Alley;
         horizon = crc2.canvas.height * golden;
         drawBackground();
         drawSun({ x: 650, y: 125 });
-        drawCloudBig({ x: 175, y: 125 }, { x: 250, y: 75 });
         drawMountains({ x: 0., y: horizon }, 75, 275, "darkgrey", "white");
         drawMountains({ x: 0., y: horizon }, 50, 250, "darkgrey", "lightgrey");
-        drawCloudSmall({ x: 525, y: 150 }, { x: 125, y: 35 });
         for (let r = 0; r < 45; r++) {
             drawTrees(Math.floor(Math.random() * crc2.canvas.width) + 1, { x: 15, y: 20 });
         }
@@ -25,6 +23,13 @@ var L08_Canvas_Alley;
             let i = (Math.floor(Math.random() * 3) + 1) - 1;
             drawFlowers(Math.floor(Math.random() * crc2.canvas.width) + 1, { x: 3, y: 3 }, flowerColors[i]);
         }
+        crc2.save();
+        drawCloudBig({ x: 175, y: 125 }, { x: 250, y: 75 });
+        drawCloudSmall({ x: 525, y: 150 }, { x: 125, y: 35 });
+        crc2.restore();
+        window.setInterval(update, 20);
+    }
+    function update() {
     }
     function drawBackground() {
         console.log("Background");
@@ -166,4 +171,4 @@ var L08_Canvas_Alley;
         crc2.restore();
     }
 })(L08_Canvas_Alley || (L08_Canvas_Alley = {}));
-//# sourceMappingURL=Landschaftsbild.js.map
+//# sourceMappingURL=Blumenwiese2.js.map
