@@ -22,7 +22,7 @@ namespace L09_2_Blumenwiese {
     let cloudSmall: Cloud;
     let cloudBig: Cloud;
 
-    let bee: Bee;
+    let bees: Bee[] = [];
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -62,8 +62,11 @@ namespace L09_2_Blumenwiese {
             flowers[r].draw(flowerPos);
         }
 
-        bee = new Bee(crc2);
-        bee.draw();
+        for (let b: number = 0; b < 4; b++){
+            bees.push(new Bee(crc2, {x:randomNumber(0, crc2.canvas.width), y: randomNumber(crc2.canvas.height/2, crc2.canvas.height)}, randomNumber(0, 15), {x: randomNumber(-3, 4), y: randomNumber(-1, 2)}));
+            bees[b].drawRight();
+        }
+
 
         window.setInterval(update, 20);
     }
@@ -84,15 +87,43 @@ namespace L09_2_Blumenwiese {
         if (cloudSmall.position.x > crc2.canvas.width + 100)
             cloudSmall.position.x = -100;
         cloudSmall.draw({ x: 125, y: 35 }, 20, 30);
+        
         for (let i: number = 0; i < trees.length; i++) {
             trees[i].draw(treePositions[i]);
         }
+        
         for (let j: number = 0; j < flowers.length; j++) {
             flowers[j].draw(flowerPositions[j]);
         }
 
-        bee.draw();
+        for(let c: number = 0; c < bees.length; c++){
+            if (bees[c].flightDuration > 16) {
+                bees[c].flightDuration = 0;
+                bees[c].direction = {x: randomNumber(-3, 4), y: randomNumber(-1, 2)};
+            }
+            bees[c].position.x += bees[c].direction.x;
+            bees[c].position.y += bees[c].direction.y;
+            if (bees[c].direction.x <= 0)
+                bees[c].drawLeft();
+            else
+                bees[c].drawRight();
+    
+            if (bees[c].position.x > crc2.canvas.width)
+                bees[c].position.x = 2;
+            else if (bees[c].position.x < 0)
+                bees[c].position.x = crc2.canvas.width - 2;
+            
+            if (bees[c].position.y > crc2.canvas.height)
+                bees[c].position.y = 2;
+            else if (bees[c].position.y < 0)
+                bees[c].position.y = crc2.canvas.height -2;
+        }
+
     }
+
+    function randomNumber(min: number, max: number): number {
+        return Math.floor(Math.random() * (max - min) + min);
+      }
 
     function drawBackground(): void {
 

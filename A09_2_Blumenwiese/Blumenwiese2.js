@@ -13,7 +13,7 @@ var L09_2_Blumenwiese;
     let mountainWhite;
     let cloudSmall;
     let cloudBig;
-    let bee;
+    let bees = [];
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -44,8 +44,10 @@ var L09_2_Blumenwiese;
             flowerPositions.push(flowerPos);
             flowers[r].draw(flowerPos);
         }
-        bee = new L09_2_Blumenwiese.Bee(crc2);
-        bee.draw();
+        for (let b = 0; b < 4; b++) {
+            bees.push(new L09_2_Blumenwiese.Bee(crc2, { x: randomNumber(0, crc2.canvas.width), y: randomNumber(crc2.canvas.height / 2, crc2.canvas.height) }, randomNumber(0, 15), { x: randomNumber(-3, 4), y: randomNumber(-1, 2) }));
+            bees[b].drawRight();
+        }
         window.setInterval(update, 20);
     }
     function update() {
@@ -68,7 +70,29 @@ var L09_2_Blumenwiese;
         for (let j = 0; j < flowers.length; j++) {
             flowers[j].draw(flowerPositions[j]);
         }
-        bee.draw();
+        for (let c = 0; c < bees.length; c++) {
+            if (bees[c].flightDuration > 16) {
+                bees[c].flightDuration = 0;
+                bees[c].direction = { x: randomNumber(-3, 4), y: randomNumber(-1, 2) };
+            }
+            bees[c].position.x += bees[c].direction.x;
+            bees[c].position.y += bees[c].direction.y;
+            if (bees[c].direction.x <= 0)
+                bees[c].drawLeft();
+            else
+                bees[c].drawRight();
+            if (bees[c].position.x > crc2.canvas.width)
+                bees[c].position.x = 2;
+            else if (bees[c].position.x < 0)
+                bees[c].position.x = crc2.canvas.width - 2;
+            if (bees[c].position.y > crc2.canvas.height)
+                bees[c].position.y = 2;
+            else if (bees[c].position.y < 0)
+                bees[c].position.y = crc2.canvas.height - 2;
+        }
+    }
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
     }
     function drawBackground() {
         let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
