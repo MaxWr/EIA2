@@ -1,12 +1,12 @@
 "use strict";
-var L10_2_BlumenwiesePolymorphie;
-(function (L10_2_BlumenwiesePolymorphie) {
+var L11_1_BlumenwieseAdvanced;
+(function (L11_1_BlumenwieseAdvanced) {
     let Facing;
     (function (Facing) {
         Facing[Facing["RIGHT"] = 0] = "RIGHT";
         Facing[Facing["LEFT"] = 1] = "LEFT";
     })(Facing || (Facing = {}));
-    class Bee extends L10_2_BlumenwiesePolymorphie.MovingObject {
+    class Bee extends L11_1_BlumenwieseAdvanced.MovingObject {
         constructor(_crc2, _position, _flightDuration, _direction) {
             super(_crc2, _position);
             this.direction = _direction;
@@ -80,6 +80,6 @@ var L10_2_BlumenwiesePolymorphie;
             this.crc2.restore();
         }
     }
-    L10_2_BlumenwiesePolymorphie.Bee = Bee;
-})(L10_2_BlumenwiesePolymorphie || (L10_2_BlumenwiesePolymorphie = {}));
+    L11_1_BlumenwieseAdvanced.Bee = Bee;
+})(L11_1_BlumenwieseAdvanced || (L11_1_BlumenwieseAdvanced = {}));
 //# sourceMappingURL=Bee.js.map

@@ -1,40 +1,50 @@
-"use strict";
-var L10_2_BlumenwiesePolymorphie;
-(function (L10_2_BlumenwiesePolymorphie) {
-    let Facing;
-    (function (Facing) {
-        Facing[Facing["RIGHT"] = 0] = "RIGHT";
-        Facing[Facing["LEFT"] = 1] = "LEFT";
-    })(Facing || (Facing = {}));
-    class Bee extends L10_2_BlumenwiesePolymorphie.MovingObject {
-        constructor(_crc2, _position, _flightDuration, _direction) {
+namespace L11_1_BlumenwieseAdvanced {
+
+    enum Facing {
+        RIGHT,
+        LEFT
+    }
+    export class Bee extends MovingObject {
+
+        private direction: Vector;
+        private flightDuration: number;
+        private facing: Facing;
+
+        constructor(_crc2: CanvasRenderingContext2D, _position: Vector, _flightDuration: number, _direction: Vector) {
             super(_crc2, _position);
             this.direction = _direction;
             this.flightDuration = _flightDuration;
         }
-        move() {
+
+        public move(): void {
             if (this.flightDuration > 16) {
                 this.flightDuration = 0;
                 this.direction = { x: Math.floor(Math.random() * 7 - 3), y: Math.floor(Math.random() * 3 - 1) };
             }
             this.position.x += this.direction.x;
             this.position.y += this.direction.y;
+
             if (this.position.x > this.crc2.canvas.width)
                 this.position.x = 2;
             else if (this.position.x < 0)
                 this.position.x = this.crc2.canvas.width - 2;
+
             if (this.position.y > this.crc2.canvas.height)
                 this.position.y = 2;
             else if (this.position.y < 0)
                 this.position.y = this.crc2.canvas.height - 2;
+
             if (this.direction.x < 0)
                 this.facing = Facing.LEFT;
             else
                 this.facing = Facing.RIGHT;
+            
             this.flightDuration++;
+
             this.draw();
         }
-        draw() {
+        public draw(): void {
+
             this.crc2.save();
             this.crc2.translate(this.position.x, this.position.y);
             this.crc2.beginPath();
@@ -43,6 +53,7 @@ var L10_2_BlumenwiesePolymorphie;
             this.crc2.closePath();
             this.crc2.fill();
             this.crc2.restore();
+
             this.crc2.save();
             if (this.facing == Facing.RIGHT)
                 this.crc2.translate(this.position.x + 5, this.position.y);
@@ -54,6 +65,7 @@ var L10_2_BlumenwiesePolymorphie;
             this.crc2.closePath();
             this.crc2.fill();
             this.crc2.restore();
+
             this.crc2.save();
             if (this.facing == Facing.RIGHT)
                 this.crc2.translate(this.position.x - 4, this.position.y - 4);
@@ -67,6 +79,7 @@ var L10_2_BlumenwiesePolymorphie;
             this.crc2.closePath();
             this.crc2.fill();
             this.crc2.restore();
+
             this.crc2.save();
             if (this.facing == Facing.RIGHT)
                 this.crc2.translate(this.position.x + 5, this.position.y - 1);
@@ -80,6 +93,4 @@ var L10_2_BlumenwiesePolymorphie;
             this.crc2.restore();
         }
     }
-    L10_2_BlumenwiesePolymorphie.Bee = Bee;
-})(L10_2_BlumenwiesePolymorphie || (L10_2_BlumenwiesePolymorphie = {}));
-//# sourceMappingURL=Bee.js.map
+}

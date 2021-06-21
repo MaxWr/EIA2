@@ -1,0 +1,1 @@
+{"version":3,"file":"StaticObject.js","sourceRoot":"","sources":["StaticObject.ts"],"names":[],"mappings":";AAAA,IAAU,yBAAyB,CAelC;AAfD,WAAU,yBAAyB;IAE/B,MAAsB,YAAY;QAK9B,YAAY,KAA+B,EAAE,SAAiB;YAC1D,IAAI,CAAC,IAAI,GAAG,KAAK,CAAC;YAClB,IAAI,CAAC,QAAQ,GAAG,SAAS,CAAC;QAC9B,CAAC;KAIJ;IAZqB,sCAAY,eAYjC,CAAA;AACL,CAAC,EAfS,yBAAyB,KAAzB,yBAAyB,QAelC"}
