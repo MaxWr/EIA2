@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abschlussarbeit von Max Wronka</title>
+
+    <script src="Abschlussarbeit.js"></script>
+    <script src="Human.js"></script>
+    <script src="Referee.js"></script>
+    <script src="LineJudge.js"></script>
+    <script src="Player.js"></script>
+    <script src="Ball.js"></script>
+    <script src="StartPositions.js"></script>
+    <link href="Abschlussarbeit.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Abschlussarbeit von Max Wronka</h1>
+    <p>Single click: player info</p>
+    <p>Double click: pass/ goal shot</p>
+    <form>
+    <p>
+        Team A: 
+        <input name="colorTeamA" type="color" id="colorTeamA" value="#ff0000">
+        Team B:    
+        <input name="colorTeamB" type="color" id="colorTeamB" value="#0000ff">
+    </p>
+    <p>
+        min. speed: <input name="speedMin" type="number" id="speedMin" value="3" step="1" min="1" style="width: 30px;"> 
+        max. speed: <input name="speedMax" type="number" id="speedMax" value="7" step="1" style="width: 30px;"> 
+        min. strength: <input name="strengthMin" type="number" id="strengthMin" value="3" step="1" min="1" style="width: 30px;"> 
+        max. strength: <input name="strengthMax" type="number" id="strengthMax" value="7" step="1" style="width: 30px;"> 
+    </p>
+    </form>
+    <button id="startBtn">Start</button>
+    <div><h1 id="points">0:0</h1><h1 id="currentPlayer"></h1></div>
+    <canvas width="800" height="500"></canvas>
+    <p id="playerInfo">
+
+    </p>
+
+</body>
+
+</html>
